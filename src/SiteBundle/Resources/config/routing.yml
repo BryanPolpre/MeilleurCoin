@@ -13,3 +13,7 @@ cgu:
 add:
     path:   /ad/add
     defaults: { _controller: SiteBundle:Ad:add }
+
+list:
+    path:   /ad/list
+    defaults: { _controller: SiteBundle:Ad:list }

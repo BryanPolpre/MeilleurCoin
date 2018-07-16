@@ -47,4 +47,13 @@ class AdController extends Controller
             'title'=>isset($adForm)?'Test de formulaire pour'.$adForm->getTitle() : 'Test de formulaire',
         );
     }
+
+    public function listAction()
+    {
+        $adRepo = $this->getDoctrine()->getRepository("SiteBundle:Ad");
+        $ads = $adRepo->findAll();
+
+        $args = array('ads' => $ads);
+        return $this->render('@Site/Ad/list.html.twig', $args);
+    }
 }
