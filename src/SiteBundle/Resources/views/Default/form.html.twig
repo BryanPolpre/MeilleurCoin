@@ -1,0 +1,16 @@
+{# empty Twig template #}
+{% block form_row %}
+    <div style="margin:15px 0;">
+        <div style="float:left; width: 100px;">
+            {{form_label(form)}}
+        </div>
+
+        <div>
+            {{form_widget(form)}}
+        </div>
+        <div style="color:red;">
+            {{form_errors(form)}}
+        </div>
+
+    </div>
+{% endblock %}

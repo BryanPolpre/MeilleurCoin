@@ -8,4 +8,8 @@ faq:
 
 cgu:
     path:   /cgu
-    defaults: { _controller: SiteBundle:Default:cgu }
+    defaults: { _controller: SiteBundle:Default:cgu }    defaults: { _controller: SiteBundle:Default:cgu }
+
+add:
+    path:   /ad/add
+    defaults: { _controller: SiteBundle:Ad:add }
