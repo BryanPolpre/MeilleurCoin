@@ -1,0 +1,100 @@
+body {
+    text-align: center;
+}
+
+h1, h2, h3, a, p, div {
+    font-family: arial,sans-serif;
+    text-align: left;
+}
+
+h1, p.logo {
+    float: left;
+}
+
+hr {
+    margin-top: 20px;
+}
+
+p.logo {
+    margin-left: 300px;
+    margin-right: 20px;
+}
+
+div.clear {
+    clear: both;
+}
+
+ul.menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+    ul.menu li {
+        display: block;
+        border: 1px solid #000000;
+        width: 100px;
+        background-color: #D7DDDB;
+        float: left;
+        margin-right: 10px;
+    }
+
+    ul.menu li:hover {
+        background-color: #FAC699;
+    }
+
+        ul.menu li a,
+        ul.menu li a:hover,
+        ul.menu li a:active {
+            text-align: center;
+            display: block;
+            color: #712164;
+            text-decoration: none;
+            padding: 5px;
+            font-weight: bold;
+        }
+
+div.header, div.body, div.footer {
+    width: 800px;
+    margin: auto;
+}
+
+div.post {
+    margin-top: 40px;
+}
+    div.post a,
+    div.post a:hover,
+    div.post a:active {
+        color: #4F8A83;
+    }
+
+    div.post h3 {
+        margin: 10px 0;
+    }
+
+    div.post hr {
+        margin: 0;
+    }
+
+    p.details {
+        text-align: right;
+        font-size: 14px;
+    }
+
+        p.details span.date {
+            font-weight: bold;
+        }
+
+        p.details span.author {
+            font-style: italic;
+        }
+
+    p.content {
+        font-size: 15px;
+    }
+
+div.footer {
+    padding: 40px 0 20 0;
+    text-align: center;
+    font-size: 12px;
+}
