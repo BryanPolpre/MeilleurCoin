@@ -1,4 +1,4 @@
-site_homepage:
+index:
     path:     /
     defaults: { _controller: SiteBundle:Default:index }
 
