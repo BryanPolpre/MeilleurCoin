@@ -1,0 +1,11 @@
+{% extends '@Site/general.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Détail annonce
+{% endblock %}
+
+{% block body %}
+    <h3>Détail d'une annonce</h3>
+    {% form_theme form 'SiteBundle:Default:form.html.twig' %}
+    {{form(form)}}
+{% endblock %}
