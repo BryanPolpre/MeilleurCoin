@@ -6,6 +6,6 @@
 
 {% block body %}
     <h3>Ajouter une annonce</h3>
-    {% form_theme form 'BlogFrontBundle:Default:form.html.twig' %}
+    {% form_theme form '@Site/Default/form.html.twig' %}
     {{form(form)}}
 {% endblock %}
