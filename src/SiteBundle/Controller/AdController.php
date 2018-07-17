@@ -5,12 +5,15 @@ namespace SiteBundle\Controller;
 use DateTime;
 use SiteBundle\Entity\Ad;
 use SiteBundle\Form\AdSearchType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
 
@@ -18,7 +21,7 @@ class AdController extends Controller
 {
     /**
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function addAction(Request $request)
     {
@@ -31,9 +34,14 @@ class AdController extends Controller
                 'constraints' => array(New NotBlank),
                 'label' => 'Description',
                 'attr' => array('rows' => 10, 'cols' => 50)))
-            ->add('city',  TextType::class,array('constraints'=>array(new NotBlank), 'label' => 'city'))
-            ->add('zip', TextType::class, array('constraints' => array(new NotBlank), 'label' => 'Code Postal'))
-            ->add('price', IntegerType::class, array('constraints' => array(new NotNull), 'label' => 'Prix'))
+            ->add('category', EntityType::class, array(
+                'class' => 'Blog\FrontBundle\Entity\Category',
+                'choice_label' => function(Category $category){
+                    return $category->name();
+                }))
+            ->add('city',  TextType::class,array('constraints'=>array(new NotBlank), 'label' => 'Ville'))
+            ->add('zip', IntegerType::class, array('constraints' => array(new NotBlank), 'label' => 'Code Postal', 'attr' => array('maxlength' => 5)))
+            ->add('price', NumberType::class, array('scale' => 2, 'constraints' => array(new NotNull), 'label' => 'Prix'))
             ->add('valider', SubmitType::class, array('attr' => array('class' => 'save')))
             ->getForm();
         $form->handleRequest($request);
@@ -71,15 +79,9 @@ class AdController extends Controller
         return $this->render('@Site/Ad/list.html.twig', $args);
     }
     
-    public function detailAction(Request $request){
-        /*$adRepo = $this->getDoctrine()->getRepository("SiteBundle:Ad");
-        $adForm= new Ad();
-        $form->handleRequest($request);*/
+    public function detailAction(Ad $ad){
+       
+        return $this->render('@Site/Ad/detailAd.html.twig', array('ad' => $ad));
 
-        $em = $this->getDoctrine()->getManager();
-        $adRepo = $em->getRepository('SiteBundle:Ad');
-        $this->$ads = $adRepo->findAll();
-
-        return $this->render('@Site/default/detailAd.html.twig', $ads);
     }
 }
