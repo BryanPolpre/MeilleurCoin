@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -25,9 +26,24 @@ class UserController extends Controller {
         $userForm = new User();
         
         $form = $this->createFormBuilder($userForm)
-            ->add('username',  TextType::class,array('constraints'=>array(new NotBlank, new Length(array('min' => 5, 'max' => 50))), 'label' => 'Nom d\'utilisateur'))
-            ->add('email',  TextType::class,array('constraints'=>array(new NotBlank, new Length(array('min' => 5, 'max' => 255))), 'label' => 'Email'))
-            ->add('password',  PasswordType::class,array('constraints'=>array(new NotBlank, new Length(array('min' => 5, 'max' => 255))), 'label' => 'Mot de passe'))
+            ->add('username',  TextType::class,array(
+                'constraints'=>array(
+                    new NotBlank,
+                    new Length(array('min' => 5, 'max' => 50))),
+                'label' => 'Nom d\'utilisateur'))
+            ->add('email',  TextType::class,array(
+                'constraints'=>array(
+                    new NotBlank, 
+                    new Length(array('min' => 5, 'max' => 255)),                    
+                    new Email(array(
+                        'message' => 'The email "{{ value }}" is not a valid email.',
+                        'checkMX' => true))),
+                'label' => 'Email'))
+            ->add('password',  PasswordType::class,array(
+                'constraints'=>array(
+                    new NotBlank, 
+                    new Length(array('min' => 5, 'max' => 255))),
+                'label' => 'Mot de passe'))
             ->add('valider', SubmitType::class, array('attr' => array('class' => 'save')))
             ->getForm();
         $form->handleRequest($request);
