@@ -12,11 +12,37 @@ use Doctrine\ORM\EntityRepository;
  */
 class AdRepository extends EntityRepository
 {
-    public function getAds()
+    public function findAll()
     {
-        $request = 'SELECT ad
-            FROM SiteBundle:Ad ad';
-        $query = $this->getEntityManager()->createQuery($request);
-        return $query->getResult();
+        return $this->findBy(array(), array('title' => 'ASC'));
     }
+
+    public function getAdByParam($param)
+    {
+        $qb = $this->createQueryBuilder('adsearch');
+
+        $qb->select('ad')
+            ->from('SiteBundle:Ad', 'ad')
+            ->join('ad.category', 'cat')
+            ->orderBy('ad.title', 'ASC');
+
+        $i=1;
+        foreach ($param as $key => $value) {
+            if(!empty($value)) {
+                if ($key == "title") {
+                    $qb
+                        ->andWhere($key . ' LIKE ?' . $i)
+                        ->setParameter(2, '%' . addcslashes($value, '%_') . '%');
+                } else {
+                    $qb
+                        ->andWhere($key . ' = ?' . $i)
+                        ->setParameter($i, $value);
+                }
+
+                $i++;
+            }
+        }
+        return $qb->getQuery()->getResult();
+    }
+
 }
