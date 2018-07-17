@@ -1,0 +1,11 @@
+{% extends '@Site/general.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Création utilisateur
+{% endblock %}
+
+{% block body %}
+    <h3>Création d'un utilisateur</h3>
+    {% form_theme form '@Site/Default/form.html.twig' %}
+    {{form(form)}}
+{% endblock %}
