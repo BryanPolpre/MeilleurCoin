@@ -10,6 +10,7 @@
     Description : {{ ad.description }}<br>
     Ville : {{ ad.city }} {{ ad.zip }}<br>
     Prix : {{ ad.price }} € <br>
-    Date de création : {{ ad.dateCreated | date('d/m/Y')}}
+    Date de création : {{ ad.dateCreated | date('d/m/Y')}}<br>
+    Catégorie : {{ ad.category.libelle }}
 
 {% endblock %}
