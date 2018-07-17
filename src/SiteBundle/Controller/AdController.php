@@ -4,8 +4,10 @@ namespace SiteBundle\Controller;
 
 use DateTime;
 use SiteBundle\Entity\Ad;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -30,9 +32,14 @@ class AdController extends Controller
                 'constraints' => array(New NotBlank),
                 'label' => 'Description',
                 'attr' => array('rows' => 10, 'cols' => 50)))
-            ->add('city',  TextType::class,array('constraints'=>array(new NotBlank), 'label' => 'city'))
-            ->add('zip', TextType::class, array('constraints' => array(new NotBlank), 'label' => 'Code Postal'))
-            ->add('price', IntegerType::class, array('constraints' => array(new NotNull), 'label' => 'Prix'))
+            ->add('category', EntityType::class, array(
+                'class' => 'Blog\FrontBundle\Entity\Category',
+                'choice_label' => function(Category $category){
+                    return $category->name();
+                }))
+            ->add('city',  TextType::class,array('constraints'=>array(new NotBlank), 'label' => 'Ville'))
+            ->add('zip', IntegerType::class, array('constraints' => array(new NotBlank), 'label' => 'Code Postal', 'attr' => array('maxlength' => 5)))
+            ->add('price', NumberType::class, array('scale' => 2, 'constraints' => array(new NotNull), 'label' => 'Prix'))
             ->add('valider', SubmitType::class, array('attr' => array('class' => 'save')))
             ->getForm();
         $form->handleRequest($request);
