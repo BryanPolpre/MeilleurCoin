@@ -1,0 +1,1 @@
+INSERT INTO `category` (`id`, `libelle`) VALUES (NULL, 'Voiture'), (NULL, 'Moto'), (NULL, 'Jeux vidéos'), (NULL, 'Meuble'), (NULL, 'Jouet');
