@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
 
@@ -17,7 +18,7 @@ class AdController extends Controller
 {
     /**
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function addAction(Request $request)
     {
@@ -60,15 +61,9 @@ class AdController extends Controller
         return $this->render('@Site/Ad/list.html.twig', $args);
     }
     
-    public function detailAction(Request $request){
-        /*$adRepo = $this->getDoctrine()->getRepository("SiteBundle:Ad");
-        $adForm= new Ad();
-        $form->handleRequest($request);*/
+    public function detailAction(Ad $ad){
+       
+        return $this->render('@Site/Ad/detailAd.html.twig', array('ad' => $ad));
 
-        $em = $this->getDoctrine()->getManager();
-        $adRepo = $em->getRepository('SiteBundle:Ad');
-        $this->$ads = $adRepo->findAll();
-
-        return $this->render('@Site/default/detailAd.html.twig', $ads);
     }
 }

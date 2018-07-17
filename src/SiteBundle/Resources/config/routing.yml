@@ -15,7 +15,7 @@ add:
     defaults: { _controller: SiteBundle:Ad:add }
     
 detail_ad:
-    path:   /ad/detail
+    path:   /ad/detail/{id}
     defaults: { _controller: SiteBundle:Ad:detail }
 
 list:
