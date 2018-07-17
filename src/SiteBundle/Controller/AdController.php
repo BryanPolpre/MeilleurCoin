@@ -4,6 +4,7 @@ namespace SiteBundle\Controller;
 
 use DateTime;
 use SiteBundle\Entity\Ad;
+use SiteBundle\Form\AdSearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -51,12 +52,22 @@ class AdController extends Controller
         ));
     }
 
-    public function listAction()
+    public function listAction(Request $request)
     {
         $adRepo = $this->getDoctrine()->getRepository("SiteBundle:Ad");
-        $ads = $adRepo->findAll();
+        $all_ad = $adRepo->findAll();
 
-        $args = array('ads' => $ads);
+        $ad = new ad();
+        $form = $this->createForm(AdSearchType::class, $ad);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $all_ad = $adRepo->getAdByParam(array('ad.title' => $ad->getTitle(), 'cat.id' => $ad->getCategory()));
+        }
+
+        $args = array(
+            'all_ad' => $all_ad,
+            'form'=>$form->createView()
+        );
         return $this->render('@Site/Ad/list.html.twig', $args);
     }
     
