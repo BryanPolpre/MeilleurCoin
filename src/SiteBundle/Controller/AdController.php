@@ -4,6 +4,7 @@ namespace SiteBundle\Controller;
 
 use DateTime;
 use SiteBundle\Entity\Ad;
+use SiteBundle\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -28,16 +29,17 @@ class AdController extends Controller
 
         $adForm= new Ad();
         $form = $this->createFormBuilder($adForm)
-            ->add('title',  TextType::class,array('constraints'=>array(new NotBlank), 'label' => 'Titre'))
+            ->add('title',  TextType::class,array('constraints' => array(new NotBlank), 'label' => 'Titre'))
             ->add('description',  TextareaType::class, array(
                 'constraints' => array(New NotBlank),
                 'label' => 'Description',
                 'attr' => array('rows' => 10, 'cols' => 50)))
             ->add('category', EntityType::class, array(
-                'class' => 'Blog\FrontBundle\Entity\Category',
+                'class' => 'SiteBundle\Entity\Category',
                 'choice_label' => function(Category $category){
-                    return $category->name();
-                }))
+                    return $category->getLibelle();
+                },
+                'label' => 'Catégorie'))
             ->add('city',  TextType::class,array('constraints'=>array(new NotBlank), 'label' => 'Ville'))
             ->add('zip', IntegerType::class, array('constraints' => array(new NotBlank), 'label' => 'Code Postal', 'attr' => array('maxlength' => 5)))
             ->add('price', NumberType::class, array('scale' => 2, 'constraints' => array(new NotNull), 'label' => 'Prix'))
