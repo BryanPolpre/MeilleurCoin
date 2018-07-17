@@ -12,4 +12,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class AdRepository extends EntityRepository
 {
+    public function getAds()
+    {
+        $request = 'SELECT ad
+            FROM SiteBundle:Ad ad';
+        $query = $this->getEntityManager()->createQuery($request);
+        return $query->getResult();
+    }
 }
