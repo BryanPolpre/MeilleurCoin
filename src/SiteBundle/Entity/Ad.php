@@ -62,19 +62,17 @@ class Ad
     private $category;
 
     /**
-<<<<<<< HEAD
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="ads")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
     
-=======
-     * @ORM\OneToMany(targetEntity="Picture",mappedBy="ad", cascade="persist", orphanRemoval=true)
-     */
+    /**
+    * @ORM\OneToMany(targetEntity="Picture",mappedBy="ad", cascade="persist", orphanRemoval=true)
+    */
      private $pictures;
 
->>>>>>> be17becf6ad4d12683ea932b46dc8caf926dd83c
     /**
      * Get id
      *
