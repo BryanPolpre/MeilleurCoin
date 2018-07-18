@@ -11,5 +11,7 @@
     Ville : {{ ad.city }} {{ ad.zip }}<br>
     Prix : {{ ad.price }} € <br>
     Date de création : {{ ad.dateCreated | date('d/m/Y')}}<br>
-    Catégorie : {{ ad.category.libelle }}
+    {% if ad.category != null %}
+        Catégorie : {{ ad.category.libelle }}
+    {% endif %}
 {% endblock %}
