@@ -24,6 +24,7 @@ class AdController extends Controller
 
         $ad= new Ad();
         $form = $this->createForm(AdType::class, $ad);
+
         $form->handleRequest($request);
 
         if($form->isValid()){
@@ -85,6 +86,21 @@ class AdController extends Controller
        
         return $this->render('@Site/Ad/detailAd.html.twig', array('ad' => $ad));
 
+    }
+   
+    public function myadsAction()
+    {
+        //XXX Voir quand user sera connecté  
+        //$user= $this->get('security.context')->getToken()->getUser();
+
+        $dql = 'SELECT ads FROM SiteBundle:Ad ads WHERE ads.id = :id_user'; //remplacer ads.id par ads.id_user
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery($dql);
+        $query->setParameter('id_user', 2); //remplacer le 2 par $user->getId()
+        $result = $query->getResult();
+
+        $args = array('myads' => $result);
+        return $this->render('@Site/Ad/myads.html.twig', $args);
     }
 
     private function generateUniqueFileName()
