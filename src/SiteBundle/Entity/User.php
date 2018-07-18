@@ -4,6 +4,7 @@ namespace SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 /**
@@ -11,6 +12,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="SiteBundle\Repository\UserRepository")
+ * @UniqueEntity("username", message = "Ce nom d'utilisateur existe déjà")
+ * @UniqueEntity("email", message = "Cet email est déjà utilisé")
  */
 class User implements UserInterface {
     
@@ -92,7 +95,7 @@ class User implements UserInterface {
     }
 
     public function setPassword($password) {
-        $this->password = $password;
+        $this->password = sha1($password);
         return $this;
     }
 

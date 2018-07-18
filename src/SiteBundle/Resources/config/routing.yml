@@ -29,3 +29,7 @@ create_user:
 login:
     path:   /login
     defaults: { _controller: SiteBundle:Security:login }
+
+my_ads:
+    path:   /ad/myads
+    defaults: { _controller: SiteBundle:Ad:myads }
