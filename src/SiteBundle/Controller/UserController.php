@@ -54,8 +54,7 @@ class UserController extends Controller {
             //$userForm->setRoles(array((new Role(1, "test")), new Role(2, "test2")));
             $em->persist($userForm);
             $em->flush();
-
-            return $this->redirect($request->getUri());
+            return $this->redirect($request->getUriForPath('/'));
         }
         return $this->render("@Site\User\createUser.html.twig", array('form'=> $form->createView()));
     }
