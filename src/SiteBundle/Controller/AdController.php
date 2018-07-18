@@ -87,19 +87,18 @@ class AdController extends Controller
 
     }
    
-    public function myadsAction(Request $request)
+    public function myadsAction()
     {
-        $adRepo = $this->getDoctrine()->getRepository("SiteBundle:Ad");
-        $my_ads = $adRepo->findAll();
+        //XXX Voir quand user sera connecté  
+        //$user= $this->get('security.context')->getToken()->getUser();
+        
+        $dql = 'SELECT ads FROM SiteBundle:Ad ads WHERE ads.id = :id_user'; //remplacer ads.id par ads.id_user
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery($dql);
+        $query->setParameter('id_user', 2); //remplacer le 2 par $user->getId()
+        $result = $query->getResult();
 
-        $ad = new ad();
-        $form = $this->createForm(AdSearchType::class, $ad);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
-            $my_ads = $adRepo->getAdByParam(array('ad.title' => $ad->getTitle(), 'cat.id' => $ad->getCategory()));
-        }
-
-        $args = array('my_ads' => $my_ads);
+        $args = array('myads' => $result);
         return $this->render('@Site/Ad/myads.html.twig', $args);
     }
 }
