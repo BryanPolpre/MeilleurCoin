@@ -25,3 +25,7 @@ list:
 create_user:
     path:   /user/create
     defaults: { _controller: SiteBundle:User:create }
+    
+my_ads:
+    path:   /ad/myads
+    defaults: { _controller: SiteBundle:Ad:myads }

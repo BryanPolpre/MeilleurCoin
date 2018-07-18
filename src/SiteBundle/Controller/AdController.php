@@ -86,4 +86,20 @@ class AdController extends Controller
         return $this->render('@Site/Ad/detailAd.html.twig', array('ad' => $ad));
 
     }
+   
+    public function myadsAction(Request $request)
+    {
+        $adRepo = $this->getDoctrine()->getRepository("SiteBundle:Ad");
+        $my_ads = $adRepo->findAll();
+
+        $ad = new ad();
+        $form = $this->createForm(AdSearchType::class, $ad);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $my_ads = $adRepo->getAdByParam(array('ad.title' => $ad->getTitle(), 'cat.id' => $ad->getCategory()));
+        }
+
+        $args = array('my_ads' => $my_ads);
+        return $this->render('@Site/Ad/myads.html.twig', $args);
+    }
 }
