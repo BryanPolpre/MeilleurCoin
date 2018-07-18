@@ -58,5 +58,39 @@ class UserController extends Controller {
         }
         return $this->render("@Site\User\createUser.html.twig", array('form'=> $form->createView()));
     }
+
+    public function connectAction(Request $request)
+    {
+        $userRepo = $this->getDoctrine()->getRepository("SiteBundle:User");
+        $userForm = new User();
+
+        $form = $this->createFormBuilder($userForm)
+            ->add('username',  TextType::class,array(
+                'constraints'=>array(
+                    new NotBlank,
+                    new Length(array('min' => 5, 'max' => 50))),
+                'label' => 'Nom d\'utilisateur'))
+            ->add('password',  PasswordType::class,array(
+                'constraints'=>array(
+                    new NotBlank,
+                    new Length(array('min' => 5, 'max' => 255))),
+                'label' => 'Mot de passe'))
+            ->add('valider', SubmitType::class, array('attr' => array('class' => 'save')))
+            ->getForm();
+        $form->handleRequest($request);
+
+        if($form->isValid()){
+            $userRepo->findBy(array('username' => $form->getData('username')));
+
+            $em = $this->getDoctrine()->getManager();
+            $userForm->setDateRegistered(new DateTime());
+            //$userForm->setRoles(array((new Role(1, "test")), new Role(2, "test2")));
+            $em->persist($userForm);
+            $em->flush();
+
+            return $this->redirect($request->getUri());
+        }
+        return $this->render("@Site\User\createUser.html.twig", array('form'=> $form->createView()));
+    }
     
 }

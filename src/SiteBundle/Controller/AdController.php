@@ -42,7 +42,11 @@ class AdController extends Controller
                 },
                 'label' => 'Catégorie'))
             ->add('city',  TextType::class,array('constraints'=>array(new NotBlank), 'label' => 'Ville'))
-            ->add('zip', IntegerType::class, array('constraints' => array(new NotBlank), 'label' => 'Code Postal', 'attr' => array('maxlength' => 5)))
+            ->add('zip', IntegerType::class, array(
+                'constraints' => array(new NotBlank),
+                'label' => 'Code Postal',
+                'attr' => array('max-length' => 5, 'min-length' => 5)
+            ))
             ->add('price', NumberType::class, array('scale' => 2, 'constraints' => array(new NotNull), 'label' => 'Prix'))
             ->add('valider', SubmitType::class, array('attr' => array('class' => 'save')))
             ->getForm();
