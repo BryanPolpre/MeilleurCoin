@@ -25,3 +25,7 @@ list:
 create_user:
     path:   /user/create
     defaults: { _controller: SiteBundle:User:create }
+
+login:
+    path:   /login
+    defaults: { _controller: SiteBundle:Security:login }
