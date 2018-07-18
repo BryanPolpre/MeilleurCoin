@@ -84,7 +84,6 @@ class UserController extends Controller {
 
             $em = $this->getDoctrine()->getManager();
             $userForm->setDateRegistered(new DateTime());
-            //$userForm->setRoles(array((new Role(1, "test")), new Role(2, "test2")));
             $em->persist($userForm);
             $em->flush();
 

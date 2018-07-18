@@ -93,13 +93,11 @@ class AdController extends Controller
    
     public function myadsAction()
     {
-        //XXX Voir quand user sera connecté  
-        //$user= $this->get('security.context')->getToken()->getUser();
-        
-        $dql = 'SELECT ads FROM SiteBundle:Ad ads WHERE ads.id = :id_user'; //remplacer ads.id par ads.id_user
+        $user  =  $this->get( 'security.token_storage' )->getToken()->getUser ();
+        $dql = 'SELECT ads FROM SiteBundle:Ad ads WHERE ads.user = :id_user';
         $em = $this->getDoctrine()->getManager();
         $query = $em->createQuery($dql);
-        $query->setParameter('id_user', 2); //remplacer le 2 par $user->getId()
+        $query->setParameter('id_user', $user->getId());
         $result = $query->getResult();
 
         $args = array('myads' => $result);

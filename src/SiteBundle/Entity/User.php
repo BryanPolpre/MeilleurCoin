@@ -49,6 +49,12 @@ class User implements UserInterface {
      * @ORM\Column(name="date_registered", type="datetime")
      */
     private $dateRegistered;
+    
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="Ad", mappedBy="user")
+     */
+    private $ads;
 
     public function __construct()
     {

@@ -62,6 +62,13 @@ class Ad
     private $category;
 
     /**
+     *
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="ads")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+    
+    /**
      * Get id
      *
      * @return int
