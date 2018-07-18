@@ -14,19 +14,13 @@
                     <li><a href="{{ path('index') }}">Accueil</a></li>
                     <li><a href="{{ path('add') }}">Déposer une annonce</a></li>
                     <li><a href="{{ path('list') }}">Liste / recherche des annonces</a></li>
-<<<<<<< HEAD
                     <li><a href="{{ path('create_user') }}">Inscription</a></li>
                     <li><a href="{{ path('index') }}">Mes annonces</a></li>
-=======
-                    <li><a href="{{ path('create_user') }}">Inscription / Connexion</a></li>
                     <li><a href="{{ path('my_ads') }}">Mes annonces</a></li>
->>>>>>> bacdc59c59de2e8d25ac7c06cd3ce6ed0944d7cb
                     <li><a href="{{ path('index') }}">Mes favoris</a></li>
                     <li><a href="{{ path('faq') }}">FAQ</a></li>
                     <li><a href="{{ path('cgu') }}">CGU</a></li>
-                    {% if {{ isConnect }} != true %}
-                        <li><a href="{{ path('login') }}">Connexion</a></li>
-                    {% endif %}
+                    <li><a href="{{ path('login') }}">Connexion</a></li>
                 </ul>
                 <div class="clear"></div>
                 <hr />
