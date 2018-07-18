@@ -2,7 +2,6 @@
 
 namespace SiteBundle\Form;
 
-
 use SiteBundle\Entity\Ad;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -18,7 +17,7 @@ class AdSearchType extends AbstractType
         $builder
             ->add('category', EntityType::class ,array(
                     'label'  => 'Categorie :',
-                    'placeholder' => 'Choisir une categorie',
+                    'placeholder' => 'Tous',
                     'required' => false,
                     'constraints'=>array(),
                     'class' => 'SiteBundle:Category',

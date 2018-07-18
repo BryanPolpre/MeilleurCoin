@@ -57,17 +57,24 @@ class Ad
     private $dateCreated;
 
     /**
-     * @ORM\OneToOne(targetEntity="Category")
+     * @ORM\ManyToOne(targetEntity="Category")
      */
     private $category;
 
     /**
+<<<<<<< HEAD
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="ads")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
     
+=======
+     * @ORM\OneToMany(targetEntity="Picture",mappedBy="ad", cascade="persist", orphanRemoval=true)
+     */
+     private $pictures;
+
+>>>>>>> be17becf6ad4d12683ea932b46dc8caf926dd83c
     /**
      * Get id
      *
@@ -189,4 +196,21 @@ class Ad
     {
         $this->category = $category;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPictures()
+    {
+        return $this->pictures;
+    }
+
+    /**
+     * @param mixed $pictures
+     */
+    public function setPictures($pictures)
+    {
+        $this->pictures = $pictures;
+    }
+
 }
