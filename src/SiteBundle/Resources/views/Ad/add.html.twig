@@ -5,6 +5,12 @@
 {% endblock %}
 
 {% block body %}
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     <h3>Ajouter une annonce</h3>
     {% form_theme form '@Site/Default/form.html.twig' %}
     {{form(form)}}

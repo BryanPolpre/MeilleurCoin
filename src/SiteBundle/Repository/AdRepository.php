@@ -24,7 +24,7 @@ class AdRepository extends EntityRepository
 
         $qb->select('ad')
             ->from('SiteBundle:Ad', 'ad')
-            ->join('ad.category', 'cat')
+            ->leftJoin('ad.category', 'cat')
             ->orderBy('ad.title', 'ASC');
 
         $i=1;

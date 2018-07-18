@@ -6,7 +6,7 @@
 
 {% block body %}
     <div class="ads col-md-12">
-    {% for ad in my_ads %}
+    {% for ad in myads %}
         <div class="ad col-md-2" id="{{ ad.id }}">
             <a href="{{ path('detail_ad', {'id' : ad.id}) }}">
             <h3>{{ ad.title|upper }} - <span class="ville">{{ ad.city|capitalize }}</span></h3>

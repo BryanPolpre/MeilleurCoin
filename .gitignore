@@ -21,4 +21,4 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
->>>>>>> 7db387b4f479c7c4cea9068b37dcd07acef7dbae
+/web/uploads/*
