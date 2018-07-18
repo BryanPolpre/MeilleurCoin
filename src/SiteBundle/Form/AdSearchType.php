@@ -24,14 +24,15 @@ class AdSearchType extends AbstractType
                     'class' => 'SiteBundle:Category',
                     'choice_label' => function ($cat) {
                         return $cat->getLibelle();
-                    }
+                    },
+                    'attr' => array( 'class' => 'search-field' )
                 )
             )
             ->add('title', TextType::class,array(
                     'label'  => 'Annonce :',
                     'constraints'=>array(),
-                    'attr' => array(),
-                    'required' => false
+                    'required' => false,
+                    'attr' => array( 'class' => 'search-field' )
                 )
             )
             ->add('valider', SubmitType::class);

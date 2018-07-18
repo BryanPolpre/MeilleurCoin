@@ -5,13 +5,25 @@
 {% endblock %}
 
 {% block body %}
-    <div class="search">
-        {% form_theme form '@Site/Default/form.html.twig' %}
-        {{form(form)}}
+    <div class="search row justify-content-md-center">
+            {{ form_start(form) }}
+                {{ form_errors(form) }}
+
+                <div class="col-md-6">
+                {{ form_row(form.category, {'attr': {'class': 'form-inline'}}) }}
+                </div>
+                <div class="col-md-6 col-centered">
+                {{ form_row(form.title, {'attr': {'class': 'form-inline'}}) }}
+                </div>
+                <div class="col-md-12 text-center">
+                {{ form_row(form.valider) }}
+                </div>
+            {{ form_end(form) }}
     </div>
-    <div class="ads">
+    <hr class="col-md-12">
+    <div class="ads col-md-12">
     {% for ad in all_ad %}
-        <div class="ad" id="{{ ad.id }}">
+        <div class="ad col-md-2" id="{{ ad.id }}">
             <a href="{{ path('detail_ad', {'id' : ad.id}) }}">
             <h3>{{ ad.title|upper }} - <span class="ville">{{ ad.city|capitalize }}</span></h3>
             </a>
