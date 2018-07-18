@@ -10,15 +10,18 @@
                 <p class="logo col-md-1"><a href="{{ path('index') }}"><img src="{{ asset('img/logo.png') }}" alt="logo" width="100px" height="100px" /></a></p>
                 <h1 class="titre col-md-3">Le CoinTreau</h1>
                 <div class="clear"></div>
-                <ul class="menu col-md-12">
+                <ul class="nav navbar-nav col-md-12">
                     <li><a href="{{ path('index') }}">Accueil</a></li>
                     <li><a href="{{ path('add') }}">Déposer une annonce</a></li>
                     <li><a href="{{ path('list') }}">Liste / recherche des annonces</a></li>
-                    <li><a href="{{ path('create_user') }}">Inscription / Connexion</a></li>
+                    <li><a href="{{ path('create_user') }}">Inscription</a></li>
                     <li><a href="{{ path('index') }}">Mes annonces</a></li>
                     <li><a href="{{ path('index') }}">Mes favoris</a></li>
                     <li><a href="{{ path('faq') }}">FAQ</a></li>
                     <li><a href="{{ path('cgu') }}">CGU</a></li>
+                    {% if {{ isConnect }} != true %}
+                        <li><a href="{{ path('login') }}">Connexion</a></li>
+                    {% endif %}
                 </ul>
                 <div class="clear"></div>
                 <hr />
