@@ -4,19 +4,12 @@ namespace SiteBundle\Controller;
 
 use DateTime;
 use SiteBundle\Entity\Ad;
-use SiteBundle\Entity\Category;
+use SiteBundle\Entity\Picture;
 use SiteBundle\Form\AdSearchType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use SiteBundle\Form\AdType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\NotNull;
 
 class AdController extends Controller
 {
@@ -27,38 +20,44 @@ class AdController extends Controller
     public function addAction(Request $request)
     {
         $adRepo = $this->getDoctrine()->getRepository("SiteBundle:Ad");
+        $em = $this->getDoctrine()->getManager();
 
-        $adForm= new Ad();
-        $form = $this->createFormBuilder($adForm)
-            ->add('title',  TextType::class,array('constraints' => array(new NotBlank), 'label' => 'Titre'))
-            ->add('description',  TextareaType::class, array(
-                'constraints' => array(New NotBlank),
-                'label' => 'Description',
-                'attr' => array('rows' => 10, 'cols' => 50)))
-            ->add('category', EntityType::class, array(
-                'class' => 'SiteBundle\Entity\Category',
-                'choice_label' => function(Category $category){
-                    return $category->getLibelle();
-                },
-                'label' => 'Catégorie'))
-            ->add('city',  TextType::class,array('constraints'=>array(new NotBlank), 'label' => 'Ville'))
-            ->add('zip', IntegerType::class, array('constraints' => array(new NotBlank), 'label' => 'Code Postal', 'attr' => array('maxlength' => 5)))
-            ->add('price', NumberType::class, array('scale' => 2, 'constraints' => array(new NotNull), 'label' => 'Prix'))
-            ->add('valider', SubmitType::class, array('attr' => array('class' => 'save')))
-            ->getForm();
+        $ad= new Ad();
+        $form = $this->createForm(AdType::class, $ad);
         $form->handleRequest($request);
 
         if($form->isValid()){
-            $em = $this->getDoctrine()->getManager();
-            $adForm->setDateCreated(new DateTime());
-            $em->persist($adForm);
+            $ad->setDateCreated(new DateTime());
+
+            $all_picture=[];
+            $i=1;
+            foreach($ad->getPictures() as $file)
+            {
+                $fileName = $this->generateUniqueFileName().'_'. $i . '.' . $file->guessExtension();
+                $file->move(
+                    $this->getParameter('image_directory'), $fileName
+                );
+                $picture = new Picture();
+                $picture->setFile($fileName);
+                $picture->setAd($ad);
+                array_push($all_picture,$picture);
+                $i++;
+            }
+            $ad->setPictures($all_picture);
+
+            $em->persist($ad);
             $em->flush();
+
+            $this->addFlash(
+                'notice',
+                'Annonce enregistrée'
+            );
 
             return $this->redirect($request->getUri());
         }
         return $this->render("@Site\Ad\add.html.twig", array(
             'form'=> $form->createView(),
-            'title'=>isset($adForm)?'Test de formulaire pour'.$adForm->getTitle() : 'Test de formulaire',
+            'title'=>isset($ad)?'Test de formulaire pour'.$ad->getTitle() : 'Test de formulaire',
         ));
     }
 
@@ -70,6 +69,7 @@ class AdController extends Controller
         $ad = new ad();
         $form = $this->createForm(AdSearchType::class, $ad);
         $form->handleRequest($request);
+
         if($form->isSubmitted() && $form->isValid()){
             $all_ad = $adRepo->getAdByParam(array('ad.title' => $ad->getTitle(), 'cat.id' => $ad->getCategory()));
         }
@@ -85,5 +85,10 @@ class AdController extends Controller
        
         return $this->render('@Site/Ad/detailAd.html.twig', array('ad' => $ad));
 
+    }
+
+    private function generateUniqueFileName()
+    {
+        return md5(uniqid());
     }
 }
