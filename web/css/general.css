@@ -52,9 +52,10 @@ ul.menu {
             font-weight: bold;
         }
 
+/*
 div.ad {
     border: 1px solid #000000;
-    /*margin: 5px 5px;*/
+    margin: 10px 10px;
     text-align: center;
     height: 300px;
 }
@@ -67,6 +68,11 @@ div.ad {
     div.ad h3 {
         margin: 10px 0;
     }
+*/
+
+div.ad {
+
+}
 
 div.footer {
     padding: 40px 0px 20px 0px;
