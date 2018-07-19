@@ -23,9 +23,39 @@ div.clear {
     clear: both;
 }
 
+ul.menu {
+    list-style-type: none;
+    margin-left: 17px;
+    padding: 0;
+}
+
+    ul.menu li {
+        display: inline-block;
+        border: 1px solid #000000;
+        background-color: #D7DDDB;
+        float: left;
+        margin-right: 10px;
+    }
+
+    ul.menu li:hover {
+        background-color: #FAC699;
+    }
+
+        ul.menu li a,
+        ul.menu li a:hover,
+        ul.menu li a:active {
+            text-align: center;
+            display: block;
+            color: orangered;
+            text-decoration: none;
+            padding: 5px;
+            font-weight: bold;
+        }
+
+/*
 div.ad {
     border: 1px solid #000000;
-    /*margin: 5px 5px;*/
+    margin: 10px 10px;
     text-align: center;
     height: 300px;
 }
@@ -38,6 +68,11 @@ div.ad {
     div.ad h3 {
         margin: 10px 0;
     }
+*/
+
+div.ad {
+
+}
 
 div.footer {
     padding: 40px 0px 20px 0px;
@@ -70,5 +105,4 @@ li a {
 
 #ad .upload {
     margin-left: 80px;
->>>>>>> bacdc59c59de2e8d25ac7c06cd3ce6ed0944d7cb
 }

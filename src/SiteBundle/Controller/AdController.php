@@ -27,7 +27,7 @@ class AdController extends Controller
 
             $form->handleRequest($request);
 
-            if($form->isValid()){
+            if($form->isSubmitted() && $form->isValid()){
                 $ad->setDateCreated(new DateTime());
 
                 $all_picture=[];
