@@ -3,6 +3,9 @@
 namespace SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\JoinTable;
+use SiteBundle\Repository\AdRepository;
 
 /**
  * Ad
@@ -72,6 +75,17 @@ class Ad
     * @ORM\OneToMany(targetEntity="Picture",mappedBy="ad", cascade="persist", orphanRemoval=true)
     */
      private $pictures;
+     
+     
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="User")
+     * @JoinTable(name="favoris",
+     *      joinColumns={@JoinColumn(name="ad_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="id")}
+     *      )
+     */
+    private $favoris;
 
     /**
      * Get id

@@ -103,7 +103,9 @@ class AdController extends Controller
     public function favorisAction()
     {
             $user  =  $this->get( 'security.token_storage' )->getToken()->getUser();
-            $dql = 'SELECT ads FROM SiteBundle:Ad ads WHERE ads.user = :id_user';
+            $dql = 'SELECT a FROM SiteBundle:Ad a '
+                    . 'JOIN a.favoris f '
+                    . 'WHERE f.id = :id_user';
 
             $em = $this->getDoctrine()->getManager();
             $query = $em->createQuery($dql);
