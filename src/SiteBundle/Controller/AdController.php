@@ -88,7 +88,7 @@ class AdController extends Controller
    
     public function myadsAction()
     {
-            $user  =  $this->get( 'security.token_storage' )->getToken()->getUser ();
+            $user  =  $this->get( 'security.token_storage' )->getToken()->getUser();
             $dql = 'SELECT ads FROM SiteBundle:Ad ads WHERE ads.user = :id_user';
 
             $em = $this->getDoctrine()->getManager();
@@ -100,6 +100,22 @@ class AdController extends Controller
             return $this->render('@Site/Ad/myads.html.twig', $args);
     }
 
+    public function favorisAction()
+    {
+            $user  =  $this->get( 'security.token_storage' )->getToken()->getUser();
+            $dql = 'SELECT ads FROM SiteBundle:Ad ads WHERE ads.user = :id_user';
+
+            $em = $this->getDoctrine()->getManager();
+            $query = $em->createQuery($dql);
+            $query->setParameter('id_user', $user->getId());
+            $result = $query->getResult();
+
+            $args = array('myfavoris' => $result);
+            return $this->render('@Site/Ad/favorisAd.html.twig', $args);
+    }
+
+    
+    
     private function generateUniqueFileName()
     {
         return md5(uniqid());

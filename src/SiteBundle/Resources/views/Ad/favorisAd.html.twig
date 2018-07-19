@@ -1,0 +1,19 @@
+{% extends '@Site/general.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Mes annonces
+{% endblock %}
+
+{% block body %}
+    <h3>Mes favoris</h3>
+
+    <div class="ads col-md-12">
+    {% for ad in myfavoris %}
+        <div class="ad col-md-2" id="{{ ad.id }}">
+            <a href="{{ path('detail_ad', {'id' : ad.id}) }}">
+            <h3>{{ ad.title|upper }} - <span class="ville">{{ ad.city|capitalize }}</span></h3>
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

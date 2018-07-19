@@ -36,3 +36,7 @@ logout:
 my_ads:
     path:   /ad/myads
     defaults: { _controller: SiteBundle:Ad:myads }
+
+favoris:
+    path:   /ad/favoris
+    defaults: { _controller: SiteBundle:Ad:favoris }
