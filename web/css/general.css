@@ -87,6 +87,16 @@ div.footer {
     margin-top: 10px;
 }
 
+<<<<<<< HEAD
+li a {
+    text-align: center;
+    display: block;
+    color: orangered;
+    text-decoration: none;
+    padding: 5px;
+    font-weight: bold;
+=======
 #ad .upload {
     margin-left: 80px;
+>>>>>>> bacdc59c59de2e8d25ac7c06cd3ce6ed0944d7cb
 }
