@@ -93,6 +93,16 @@ div.footer {
     margin-top: 10px;
 }
 
+
+li a {
+    text-align: center;
+    display: block;
+    color: orangered;
+    text-decoration: none;
+    padding: 5px;
+    font-weight: bold;
+}
+
 #ad .upload {
     margin-left: 80px;
 }

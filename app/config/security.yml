@@ -1,6 +1,8 @@
 # To get started with security, check out the documentation:
 # https://symfony.com/doc/current/security.html
 security:
+    access_control:
+        - { path: ^/ad, roles: ROLE_USER }
     encoders:
         SiteBundle\Entity\User:
             algorithm: bcrypt
@@ -27,6 +29,10 @@ security:
             logout:
                 path:   /logout
                 target: /
+            remember_me:
+                secret:   '%secret%'
+                lifetime: 604800 # 1 week in seconds
+                path: /
         # activate different ways to authenticate
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
