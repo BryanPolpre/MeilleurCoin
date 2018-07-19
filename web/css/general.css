@@ -52,6 +52,14 @@ ul.menu {
             font-weight: bold;
         }
 
+div.ad {
+    cursor: pointer;
+}
+
+div.ad:hover {
+    opacity: 0.5;
+}
+
 div.ad .thumbnail{
     postition : relative;
     height : 400px;

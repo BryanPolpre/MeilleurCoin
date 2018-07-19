@@ -23,24 +23,22 @@
     <hr class="col-md-12">
     <div class="ads row">
     {% for ad in all_ad %}
-        <div class="ad col-sm-2">
-            <a href="{{ path("detail_ad", {"id" : ad.id}) }}">
-                <div class="thumbnail">
-                    <div class="img">
-                        {% if(ad.pictures[0] is not defined ) %}
-                            {% set img = asset('img/kitten.jpg') %}
-                        {% else %}
-                            {% set img = asset('uploads/' ~ ad.pictures[0].file) %}
-                        {% endif %}
-                        <img src="{{ img }}" alt="Photo_Annonce">
-                    </div>
-                    <div class="caption">
-                        <h3>{{ ad.title|upper }} - <span class="ville">{{ ad.city|capitalize }}</span></h3>
-                        <a href="#" class="glyphicon glyphicon-star" role="button"></a>
-                        <a href="#" class="glyphicon glyphicon-star-empty" role="button"></a>
-                    </div>
+        <div class="ad col-sm-2" onclick="window.location = '{{ path("detail_ad", {"id" : ad.id}) }}';">
+            <div class="thumbnail">
+                <div class="img">
+                    {% if(ad.pictures[0] is not defined ) %}
+                        {% set img = asset('img/kitten.jpg') %}
+                    {% else %}
+                        {% set img = asset('uploads/' ~ ad.pictures[0].file) %}
+                    {% endif %}
+                    <img src="{{ img }}" alt="Photo_Annonce">
                 </div>
-            </a>
+                <div class="caption">
+                    <h3>{{ ad.title|upper }} - <span class="ville">{{ ad.city|capitalize }}</span></h3>
+                    <a href="#" id="{{ ad.id }}" class="glyphicon glyphicon-star" role="button"></a>
+                    <a href="#" id="{{ ad.id }}" class="glyphicon glyphicon-star-empty" role="button"></a>
+                </div>
+            </div>
         </div>
     {% endfor %}
     </div>
