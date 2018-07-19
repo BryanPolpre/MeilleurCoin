@@ -20,7 +20,11 @@
                     <li><a href="{{ path('index') }}">Mes favoris</a></li>
                     <li><a href="{{ path('faq') }}">FAQ</a></li>
                     <li><a href="{{ path('cgu') }}">CGU</a></li>
-                    <li><a href="{{ path('login') }}">Connexion</a></li>
+                    {% if app.user %}
+                        <li><a href="{{ path('logout') }}">Déconnexion</a></li>
+                    {% else %}
+                        <li><a href="{{ path('login') }}">Connexion</a></li>
+                    {% endif %}
                 </ul>
                 <div class="clear"></div>
                 <hr />
