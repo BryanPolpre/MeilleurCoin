@@ -5,6 +5,7 @@ namespace SiteBundle\Controller;
 use DateTime;
 use SiteBundle\Entity\Ad;
 use SiteBundle\Entity\Picture;
+use SiteBundle\Form\AdSearchType;
 use SiteBundle\Form\AdType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
