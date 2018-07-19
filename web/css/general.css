@@ -52,26 +52,8 @@ ul.menu {
             font-weight: bold;
         }
 
-/*
-div.ad {
-    border: 1px solid #000000;
-    margin: 10px 10px;
-    text-align: center;
-    height: 300px;
-}
-    div.ad a,
-    div.ad a:hover,
-    div.ad a:active {
-        color: #4F8A83;
-    }
-
-    div.ad h3 {
-        margin: 10px 0;
-    }
-*/
-
-div.ad {
-
+div.ad .thumbnail{
+    height : 400px;
 }
 
 div.footer {
@@ -105,4 +87,9 @@ li a {
 
 #ad .upload {
     margin-left: 80px;
+}
+
+.glyphicon-star,
+.glyphicon-star-empty{
+    font-size: 2em;
 }
