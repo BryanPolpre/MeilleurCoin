@@ -106,24 +106,24 @@ class AdController extends Controller
         return $this->render('@Site/Ad/favorisAd.html.twig', $args);
     }
 
-    public function addfavorisAction(Ad $id)
+    public function addfavorisAction(Request $request, Ad $id)
     {
         $em = $this->getDoctrine()->getManager();
         $ad = $em->getRepository(Ad::class)->find($id);
         $ad->setFavoris(array($this->getUser()));
         $em->flush();
 
-        return $this->redirectToRoute('list');
+        return $this->redirect($request->server->get('HTTP_REFERER'));
     }
     
-    public function delfavorisAction(Ad $id)
+    public function delfavorisAction(Request $request,  $id)
     {
         $em = $this->getDoctrine()->getManager();
         $ad = $em->getRepository(Ad::class)->find($id);
         $ad->getFavoris()->removeElement($this->getUser());
         $em->flush();
 
-        return $this->redirectToRoute('list');
+        return $this->redirect($request->server->get('HTTP_REFERER'));
     }
     
     
