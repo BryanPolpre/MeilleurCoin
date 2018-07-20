@@ -40,3 +40,15 @@ my_ads:
 reset:
     path:   /reset
     defaults: { _controller: SiteBundle:User:reset }
+
+favoris:
+    path:   /ad/favoris
+    defaults: { _controller: SiteBundle:Ad:favoris }
+    
+add_ad_favoris:
+    path:   /ad/addfavoris/{id}
+    defaults: { _controller: SiteBundle:Ad:addfavoris }
+    
+del_ad_favoris:
+    path:   /ad/delfavoris/{id}
+    defaults: { _controller: SiteBundle:Ad:delfavoris }

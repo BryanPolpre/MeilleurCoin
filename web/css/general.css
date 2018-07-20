@@ -2,6 +2,10 @@ body {
     text-align: center;
 }
 
+body, select, input, div, a, button, img {
+    cursor: url('../img/cursor.png'), auto;
+}
+
 h1, h2, h3, a, p, div {
     font-family: arial,sans-serif;
 }
@@ -23,21 +27,73 @@ div.clear {
     clear: both;
 }
 
-div.ad {
-    border: 1px solid #000000;
-    /*margin: 5px 5px;*/
-    text-align: center;
-    height: 300px;
+ul.menu {
+    list-style-type: none;
+    margin-left: 17px;
+    padding: 0;
 }
-    div.ad a,
-    div.ad a:hover,
-    div.ad a:active {
-        color: #4F8A83;
-    }
 
-    div.ad h3 {
-        margin: 10px 0;
-    }
+ul.menu li {
+    display: inline-block;
+    border: 1px solid #000000;
+    background-color: #D7DDDB;
+    float: left;
+    margin-right: 10px;
+}
+
+ul.menu li:hover {
+    background-color: #FAC699;
+}
+
+ul.menu li a,
+ul.menu li a:hover,
+ul.menu li a:active {
+    text-align: center;
+    display: block;
+    color: orangered;
+    text-decoration: none;
+    padding: 5px;
+    font-weight: bold;
+}
+
+div.ad {
+    cursor: pointer;
+}
+
+div.ad:hover {
+    opacity: 0.75;
+}
+
+div.ad .thumbnail{
+    postition : relative;
+    height : 400px;
+}
+
+.thumbnail img {
+    max-width: 100%;
+    height: 50%;
+}
+
+.thumbnail .caption {
+    max-height: 40%;
+}
+
+.glyphicon-star,
+.glyphicon-star-empty{
+    position :absolute;
+    top: 360px;
+    right: 30px;
+    font-size: 2em;
+    text-decoration: none;
+    color:orange;
+}
+
+.glyphicon-star:hover,
+.glyphicon-star-empty:hover{
+    text-decoration: none;
+    color:orange;
+    transform: scale(1.5);
+}
 
 div.footer {
     padding: 40px 0px 20px 0px;
@@ -58,6 +114,9 @@ div.footer {
     margin-top: 10px;
 }
 
+div.ads {
+    margin-top: 30px;
+}
 
 li a {
     text-align: center;
@@ -70,5 +129,4 @@ li a {
 
 #ad .upload {
     margin-left: 80px;
->>>>>>> bacdc59c59de2e8d25ac7c06cd3ce6ed0944d7cb
 }

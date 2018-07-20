@@ -1,13 +1,13 @@
 {% extends '@Site/general.html.twig' %}
 
 {% block title %}
-    {{ parent() }} - Mes annonces
+    {{ parent() }} - Mes favoris
 {% endblock %}
 
 {% block body %}
-    <h3>Mes annonces</h3>
+    <h3>Mes favoris</h3>
     <div class="ads row">
-        {% for ad in myads %}
+        {% for ad in myfavoris %}
             <div class="ad col-sm-2" onclick="window.location = '{{ path("detail_ad", {"id" : ad.id}) }}';">
                 <div class="thumbnail">
                     <div class="img">

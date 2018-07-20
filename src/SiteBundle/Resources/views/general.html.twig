@@ -11,20 +11,25 @@
                 <h1 class="titre col-md-3">Le CoinTreau</h1>
                 <div class="clear"></div>
                 <ul class="nav navbar-nav col-md-12">
+                {% if is_granted("ROLE_USER") %}
                     <li><a href="{{ path('index') }}">Accueil</a></li>
                     <li><a href="{{ path('add') }}">Déposer une annonce</a></li>
                     <li><a href="{{ path('list') }}">Liste / recherche des annonces</a></li>
-                    <li><a href="{{ path('create_user') }}">Inscription</a></li>
-                    <li><a href="{{ path('index') }}">Mes annonces</a></li>
                     <li><a href="{{ path('my_ads') }}">Mes annonces</a></li>
-                    <li><a href="{{ path('index') }}">Mes favoris</a></li>
+                    <li><a href="{{ path('favoris') }}">Mes favoris</a></li>
                     <li><a href="{{ path('faq') }}">FAQ</a></li>
                     <li><a href="{{ path('cgu') }}">CGU</a></li>
-                    {% if app.user %}
-                        <li><a href="{{ path('logout') }}">Déconnexion</a></li>
-                    {% else %}
-                        <li><a href="{{ path('login') }}">Connexion</a></li>
-                    {% endif %}
+                {% else %}
+                    <li><a href="{{ path('index') }}">Accueil</a></li>
+                    <li><a href="{{ path('create_user') }}">Inscription</a></li>
+                    <li><a href="{{ path('faq') }}">FAQ</a></li>
+                    <li><a href="{{ path('cgu') }}">CGU</a></li>                
+                {% endif %}
+                {% if app.user %}
+                    <li><a href="{{ path('logout') }}">Déconnexion</a></li>
+                {% else %}
+                    <li><a href="{{ path('login') }}">Connexion</a></li>
+                {% endif %}
                 </ul>
                 <div class="clear"></div>
                 <hr />
