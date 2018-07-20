@@ -28,6 +28,7 @@ class AdController extends Controller
 
             if($form->isSubmitted() && $form->isValid()){
                 $ad->setDateCreated(new DateTime());
+                $ad->setUser($this->getUser());
 
                 $all_picture=[];
                 $i=1;
@@ -63,22 +64,22 @@ class AdController extends Controller
 
     public function listAction(Request $request)
     {
-            $adRepo = $this->getDoctrine()->getRepository("SiteBundle:Ad");
-            $all_ad = $adRepo->findAll();
+        $adRepo = $this->getDoctrine()->getManager()->getRepository(Ad::class);
+        $all_ad = $adRepo->findAll();
 
-            $ad = new ad();
-            $form = $this->createForm(AdSearchType::class, $ad);
-            $form->handleRequest($request);
+        $ad = new ad();
+        $form = $this->createForm(AdSearchType::class, $ad);
+        $form->handleRequest($request);
 
-            if($form->isSubmitted() && $form->isValid()){
-                $all_ad = $adRepo->getAdByParam(array('ad.title' => $ad->getTitle(), 'cat.id' => $ad->getCategory()));
-            }
+        if($form->isSubmitted() && $form->isValid()){
+            $all_ad = $adRepo->getAdByParam(array('ad.title' => $ad->getTitle(), 'cat.id' => $ad->getCategory()));
+        }
 
-            $args = array(
-                'all_ad' => $all_ad,
-                'form'=>$form->createView()
-            );
-            return $this->render('@Site/Ad/list.html.twig', $args);
+        $args = array(
+            'all_ad' => $all_ad,
+            'form'=>$form->createView()
+        );
+        return $this->render('@Site/Ad/list.html.twig', $args);
     }
     
     public function detailAction(Ad $ad){
@@ -87,32 +88,22 @@ class AdController extends Controller
    
     public function myadsAction()
     {
-            $user  =  $this->get( 'security.token_storage' )->getToken()->getUser();
-            $dql = 'SELECT ads FROM SiteBundle:Ad ads WHERE ads.user = :id_user';
-
+            $user  =  $this->getUser();
             $em = $this->getDoctrine()->getManager();
-            $query = $em->createQuery($dql);
-            $query->setParameter('id_user', $user->getId());
-            $result = $query->getResult();
+            $myAads = $em->getRepository(Ad::class)->findBy(array('user' => $user));
 
-            $args = array('myads' => $result);
+            $args = array('myads' => $myAads);
             return $this->render('@Site/Ad/myads.html.twig', $args);
     }
 
     public function favorisAction()
     {
-            $user  =  $this->get( 'security.token_storage' )->getToken()->getUser();
-            $dql = 'SELECT a FROM SiteBundle:Ad a '
-                    . 'JOIN a.favoris f '
-                    . 'WHERE f.id = :id_user';
+        $user  =  $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $myFav = $em->getRepository(Ad::class)->getFav($user);
 
-            $em = $this->getDoctrine()->getManager();
-            $query = $em->createQuery($dql);
-            $query->setParameter('id_user', $user->getId());
-            $result = $query->getResult();
-
-            $args = array('myfavoris' => $result);
-            return $this->render('@Site/Ad/favorisAd.html.twig', $args);
+        $args = array('myfavoris' => $myFav);
+        return $this->render('@Site/Ad/favorisAd.html.twig', $args);
     }
 
     public function addfavorisAction(Ad $id)
