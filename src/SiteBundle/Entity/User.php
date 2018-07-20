@@ -12,7 +12,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="SiteBundle\Repository\UserRepository")
- * @UniqueEntity("username", message = "Ce nom d'utilisateur existe déjà")
  * @UniqueEntity("email", message = "Cet email est déjà utilisé")
  */
 class User implements UserInterface {
@@ -56,6 +55,16 @@ class User implements UserInterface {
      */
     private $ads;
 
+    /**
+     * @ORM\OneToOne(targetEntity="SiteBundle\Entity\Question")
+     */
+    private $question;
+
+    /**
+     * @ORM\Column(name="reponse", type="string", length=255)
+     */
+    private $reponse;
+
     public function __construct()
     {
         $this->roles = ['ROLE_USER'];
@@ -85,6 +94,38 @@ class User implements UserInterface {
         return $this->dateRegistered;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
+
+    /**
+     * @param mixed $question
+     */
+    public function setQuestion($question)
+    {
+        $this->question = $question;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReponse()
+    {
+        return $this->reponse;
+    }
+
+    /**
+     * @param mixed $reponse
+     */
+    public function setReponse($reponse)
+    {
+        $this->reponse = $reponse;
+    }
+
     public function setId($id) {
         $this->id = $id;
         return $this;
@@ -102,6 +143,11 @@ class User implements UserInterface {
 
     public function setPassword($password) {
         $this->password = password_hash($password, PASSWORD_BCRYPT);
+        return $this;
+    }
+
+    public function setPasswordWithoutCrypt($password) {
+        $this->password = $password;
         return $this;
     }
 
