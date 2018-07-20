@@ -3,11 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp64/www/MeilleurCoin/src/SiteBundle/Resources/views/general.html.twig</file>
+            <file>file:/C:/wamp64/www/MeilleurCoin/src/SiteBundle/Resources/views/Ad/list.html.twig</file>
+            <file>file:/C:/wamp64/www/MeilleurCoin/src/SiteBundle/Entity/Ad.php</file>
             <file>file:/C:/wamp64/www/MeilleurCoin/src/SiteBundle/Controller/AdController.php</file>
             <file>file:/C:/wamp64/www/MeilleurCoin/src/SiteBundle/Resources/config/routing.yml</file>
-            <file>file:/C:/wamp64/www/MeilleurCoin/src/SiteBundle/Resources/views/Ad/detailAd.html.twig</file>
-            <file>file:/C:/wamp64/www/MeilleurCoin/src/SiteBundle/Resources/views/Ad/myads.html.twig</file>
+            <file>file:/C:/wamp64/www/MeilleurCoin/src/SiteBundle/Resources/views/Ad/favorisAd.html.twig</file>
+            <file>file:/C:/wamp64/www/MeilleurCoin/src/SiteBundle/Repository/AdRepository.php</file>
         </group>
     </open-files>
 </project-private>

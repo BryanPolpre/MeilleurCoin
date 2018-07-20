@@ -86,6 +86,7 @@ class Ad
      *      )
      */
     private $favoris;
+    
 
     /**
      * Get id
@@ -224,5 +225,22 @@ class Ad
     {
         $this->pictures = $pictures;
     }
+    
+    public function getUser() {
+        return $this->user;
+    }
 
+    public function getFavoris() {
+        return $this->favoris;
+    }
+
+    public function setUser($user) {
+        $this->user = $user;
+        return $this;
+    }
+
+    public function setFavoris($favoris) {
+        $this->favoris = $favoris;
+        return $this;
+    }
 }
