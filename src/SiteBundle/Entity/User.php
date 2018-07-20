@@ -61,7 +61,7 @@ class User implements UserInterface {
 
 
     /**
-     * @ORM\OneToOne(targetEntity="SiteBundle\Entity\Question")
+     * @ORM\ManyToOne(targetEntity="SiteBundle\Entity\Question")
      */
     private $question;
 
