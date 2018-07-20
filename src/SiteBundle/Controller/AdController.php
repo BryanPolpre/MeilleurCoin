@@ -110,20 +110,17 @@ class AdController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $ad = $em->getRepository(Ad::class)->find($id);
-        $ad->setFavoris(array());
+        $ad->setFavoris(array($this->getUser()));
         $em->flush();
         return $this->redirectToRoute('list');
     }
     
     public function delfavorisAction(Ad $id)
     {
-        $user  =  $this->get( 'security.token_storage' )->getToken()->getUser();
         $em = $this->getDoctrine()->getManager();
         $ad = $em->getRepository(Ad::class)->find($id);
-        //if($id->getUser() == $user){ //$ad->getFavoris()->toArray()
-            $ad->setFavoris()->removeElement($user->getId());
-        
-        $em->flush();
+        dump($ad->getFavoris());
+
         return $this->redirectToRoute('list');
     }
     
