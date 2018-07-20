@@ -33,35 +33,35 @@ ul.menu {
     padding: 0;
 }
 
-    ul.menu li {
-        display: inline-block;
-        border: 1px solid #000000;
-        background-color: #D7DDDB;
-        float: left;
-        margin-right: 10px;
-    }
+ul.menu li {
+    display: inline-block;
+    border: 1px solid #000000;
+    background-color: #D7DDDB;
+    float: left;
+    margin-right: 10px;
+}
 
-    ul.menu li:hover {
-        background-color: #FAC699;
-    }
+ul.menu li:hover {
+    background-color: #FAC699;
+}
 
-        ul.menu li a,
-        ul.menu li a:hover,
-        ul.menu li a:active {
-            text-align: center;
-            display: block;
-            color: orangered;
-            text-decoration: none;
-            padding: 5px;
-            font-weight: bold;
-        }
+ul.menu li a,
+ul.menu li a:hover,
+ul.menu li a:active {
+    text-align: center;
+    display: block;
+    color: orangered;
+    text-decoration: none;
+    padding: 5px;
+    font-weight: bold;
+}
 
 div.ad {
     cursor: pointer;
 }
 
 div.ad:hover {
-    opacity: 0.5;
+    opacity: 0.75;
 }
 
 div.ad .thumbnail{
@@ -81,15 +81,18 @@ div.ad .thumbnail{
 .glyphicon-star,
 .glyphicon-star-empty{
     position :absolute;
-    top: 370px;
-    right: 20px;
+    top: 360px;
+    right: 30px;
     font-size: 2em;
     text-decoration: none;
+    color:orange;
 }
 
 .glyphicon-star:hover,
 .glyphicon-star-empty:hover{
     text-decoration: none;
+    color:orange;
+    transform: scale(1.5);
 }
 
 div.footer {
