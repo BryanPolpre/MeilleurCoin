@@ -35,8 +35,13 @@
                 </div>
                 <div class="caption">
                     <h3>{{ ad.title|upper }} - <span class="ville">{{ ad.city|capitalize }}</span></h3>
-                    <a href="#" id="{{ ad.id }}" class="glyphicon glyphicon-star" role="button"></a>
-                    <a href="#" id="{{ ad.id }}" class="glyphicon glyphicon-star-empty" role="button"></a>
+                    {% set fav_star = "<a href=\""{{ path("add_ad_favoris", {"id" : ad.id}) }}"\" id=\""{{ ad.id }}"\" class=\"glyphicon glyphicon-star-empty\" role=\"button\"></a>" %}
+                    {% for fav in ad.favoris %}
+                        {% if(fav.id == app.user.id ) %}
+                            {% set fav_star = "<a href=\""{{ path("del_ad_favoris", {"id" : ad.id}) }}"\" id=\""{{ ad.id }}"\" class=\"glyphicon glyphicon-star\" role=\"button\"></a>"" %}
+                        {% endif %}
+                    {% endfor %}
+                    {{ fav_star }}"
                 </div>
             </div>
         </div>

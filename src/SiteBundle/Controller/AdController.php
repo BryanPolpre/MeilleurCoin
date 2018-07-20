@@ -19,7 +19,6 @@ class AdController extends Controller
      */
     public function addAction(Request $request)
     {
-            $adRepo = $this->getDoctrine()->getRepository("SiteBundle:Ad");
             $em = $this->getDoctrine()->getManager();
 
             $ad= new Ad();

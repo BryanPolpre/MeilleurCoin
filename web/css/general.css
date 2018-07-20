@@ -2,6 +2,10 @@ body {
     text-align: center;
 }
 
+body, select, input, div, a, button, img {
+    cursor: url('../img/cursor.png'), auto;
+}
+
 h1, h2, h3, a, p, div {
     font-family: arial,sans-serif;
 }
@@ -80,6 +84,12 @@ div.ad .thumbnail{
     top: 370px;
     right: 20px;
     font-size: 2em;
+    text-decoration: none;
+}
+
+.glyphicon-star:hover,
+.glyphicon-star-empty:hover{
+    text-decoration: none;
 }
 
 div.footer {

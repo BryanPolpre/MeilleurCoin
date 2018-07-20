@@ -30,10 +30,10 @@ class AdRepository extends EntityRepository
         $i=1;
         foreach ($param as $key => $value) {
             if(!empty($value)) {
-                if ($key == "title") {
+                if ($key == "ad.title") {
                     $qb
                         ->andWhere($key . ' LIKE ?' . $i)
-                        ->setParameter(2, '%' . addcslashes($value, '%_') . '%');
+                        ->setParameter($i, '%' . addcslashes($value, '%_') . '%');
                 } else {
                     $qb
                         ->andWhere($key . ' = ?' . $i)
@@ -43,7 +43,17 @@ class AdRepository extends EntityRepository
                 $i++;
             }
         }
+        //var_dump($qb->getQuery()); exit;
         return $qb->getQuery()->getResult();
+    }
+
+    public function getFav($user) {
+
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT a FROM SiteBundle:Ad a JOIN a.favoris f WHERE f.id = :id_user')
+            ->setParameter('id_user', $user->getId());
+
+        return $query->getResult();
     }
 
 }
