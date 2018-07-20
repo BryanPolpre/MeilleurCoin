@@ -95,6 +95,11 @@ div.ad .thumbnail{
     transform: scale(1.5);
 }
 
+.glyphicon-star:link,
+.glyphicon-star-empty:link{
+    text-decoration: none;
+}
+
 div.footer {
     padding: 40px 0px 20px 0px;
     text-align: center;

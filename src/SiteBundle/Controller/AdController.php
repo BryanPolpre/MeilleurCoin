@@ -112,6 +112,7 @@ class AdController extends Controller
         $ad = $em->getRepository(Ad::class)->find($id);
         $ad->setFavoris(array($this->getUser()));
         $em->flush();
+
         return $this->redirectToRoute('list');
     }
     
@@ -119,7 +120,8 @@ class AdController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $ad = $em->getRepository(Ad::class)->find($id);
-        dump($ad->getFavoris());
+        $ad->getFavoris()->removeElement($this->getUser());
+        $em->flush();
 
         return $this->redirectToRoute('list');
     }
@@ -129,4 +131,5 @@ class AdController extends Controller
     {
         return md5(uniqid());
     }
+
 }
