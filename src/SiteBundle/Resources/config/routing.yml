@@ -37,6 +37,10 @@ my_ads:
     path:   /ad/myads
     defaults: { _controller: SiteBundle:Ad:myads }
 
+reset:
+    path:   /reset
+    defaults: { _controller: SiteBundle:User:reset }
+
 favoris:
     path:   /ad/favoris
     defaults: { _controller: SiteBundle:Ad:favoris }
